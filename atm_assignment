@@ -1,0 +1,35 @@
+#!usr/lib/python3
+from random import uniform
+arrive_time=[]
+start_time=[]
+waiting_time=[]
+service_time=[]
+completion_time=[]
+system_time=[]
+for i in range (1000):
+	arrive_time.append(0)
+for i in range (1000):
+	completion_time.append(0)
+for i in range (1000):
+	start_time.append(0)
+for i in range (1000):
+	waiting_time.append(0)
+for i in range (1000):
+	system_time.append(0)
+for i in range (1,len(arrive_time)):
+	IAT=5*uniform(0,5)
+	arrive_time[i]= arrive_time[i-1]+IAT
+	if (arrive_time[i] > completion_time[i-1]):
+		start_time[i]=arrive_time[i]
+		waiting_time[i]=start_time[i]-arrive_time[i]
+		st=uniform(0,5)
+		completion_time[i]=start_time[i]+st
+		system_time[i]=completion_time[i]-arrive_time[i]
+
+	else :
+		start_time[i]=completion_time[i-1]
+		waiting_time[i]=start_time[i]-arrive_time[i]
+		st=uniform(0.5,2)
+		completion_time[i]=start_time[i]+st
+		system_time[i]=completion_time[i]-arrive_time[i]
+	print waiting_time[i]
